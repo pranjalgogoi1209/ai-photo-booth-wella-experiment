@@ -8,7 +8,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function EmailFeature({ setIsEmailOpen, generatedImage }) {
-  const [url, setUrl] = useState();
+  // const [url, setUrl] = useState();
   const [userEmail, setUserEmail] = useState();
   // toast options
   const toastOptions = {
@@ -19,25 +19,7 @@ export default function EmailFeature({ setIsEmailOpen, generatedImage }) {
     theme: "light",
   };
 
-  userEmail && console.log(userEmail);
-  const handleSend = () => {
-    console.log(userEmail);
-    console.log(url);
-    console.log(generatedImage);
-    console.log("clicked on Send Button");
-    // upload image post request
-    axios
-      .post("https://adp24companyday.com/aiphotobooth/upload.php", {
-        img: generatedImage.split(",")[1],
-      })
-      .then(function (response) {
-        console.log(response);
-        setUrl(response.data.url);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
+  const print = url => {
     // email post request
     axios
       .post("https://adp24companyday.com/aiphotobooth/emailer/index.php", {
@@ -46,6 +28,7 @@ export default function EmailFeature({ setIsEmailOpen, generatedImage }) {
       })
       .then(function (response) {
         console.log(response);
+
         if (response.data.status === "success") {
           toast.success("Your Image is successfully sent", toastOptions);
           setTimeout(() => {
@@ -60,11 +43,37 @@ export default function EmailFeature({ setIsEmailOpen, generatedImage }) {
       });
   };
 
+  userEmail && console.log(userEmail);
+  const handleSend = () => {
+    console.log(userEmail);
+    // console.log(url);
+    console.log(generatedImage);
+    console.log("clicked on Send Button");
+    // upload image post request
+    axios
+      .post("https://adp24companyday.com/aiphotobooth/upload.php", {
+        img: generatedImage.split(",")[1],
+      })
+      .then(function (response) {
+        console.log(response);
+        // setUrl(response.data.url);
+        print(response.data.url);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <EmailFeatureWrapper className="EmailFeature">
       <div className="container">
         <header>
-          <div className="close" onClick={() => setIsEmailOpen(false)}>
+          <div
+            className="close"
+            onClick={() => {
+              setIsEmailOpen(false);
+            }}
+          >
             <IoMdCloseCircle />
           </div>
           <Link className="logo" to={"/"}>
@@ -96,8 +105,8 @@ const EmailFeatureWrapper = styled.div`
   /* background-color: white; */
   position: absolute;
   /* top: 0; */
+  top: 0;
   left: 0;
-  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -151,6 +160,7 @@ const EmailFeatureWrapper = styled.div`
         width: 97%;
         padding: 2vw;
         font-size: 2vw;
+        font-weight: bold;
       }
       button {
         /* width: 27%; */

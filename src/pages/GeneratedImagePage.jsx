@@ -24,6 +24,7 @@ export default function GeneratedImagePage({ generatedImage, selectedGender }) {
   const handleEmail = () => {
     console.log("clicked on Email Button");
     setIsEmailOpen(true);
+    // document.body.style.overflow = "hidden";
   };
 
   useEffect(() => {
