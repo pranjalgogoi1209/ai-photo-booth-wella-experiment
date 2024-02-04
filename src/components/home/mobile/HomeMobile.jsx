@@ -18,9 +18,9 @@ export default function HomeMobile() {
   return (
     <HomeMobileWrapper>
       <header>
-        <div className="logo">
+        <Link to={"/"} className="logo">
           <img src={logo} alt="logo" />
-        </div>
+        </Link>
         <h1>AI Photobooth Generator</h1>
       </header>
 

@@ -1,10 +1,9 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-
 import Webcam from "react-webcam";
-
 import logo from "./../../../assets/logo.png";
 import frame from "./../../../assets/capture-image-page/desktop-webcam-frame.png";
+import { Link } from "react-router-dom";
 
 export default function CaptureMobileImage({ handleSubmit, setImg, img }) {
   const webRef = useRef();
@@ -23,9 +22,9 @@ export default function CaptureMobileImage({ handleSubmit, setImg, img }) {
   return (
     <CaptureMobileImageWrapper>
       <header>
-        <div className="logo">
+        <Link to={"/"} className="logo">
           <img src={logo} alt="logo" />
-        </div>
+        </Link>
         <h1>Capture Your Face</h1>
       </header>
 

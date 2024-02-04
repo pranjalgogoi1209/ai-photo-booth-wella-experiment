@@ -1,4 +1,4 @@
-import femaleCard01 from "././girls/femaleCard01New.png";
+import femaleCard01 from "././girls/femaleCard01.png";
 import femaleCard02 from "././girls/femaleCard02.png";
 import femaleCard03 from "././girls/femaleCard03.png";
 import femaleCard04 from "././girls/femaleCard04.png";

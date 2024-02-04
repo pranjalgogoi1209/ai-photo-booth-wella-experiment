@@ -42,7 +42,12 @@ export default function App() {
         />
         <Route
           path="/generated-image"
-          element={<GeneratedImagePage generatedImage={generatedImage} />}
+          element={
+            <GeneratedImagePage
+              generatedImage={generatedImage}
+              selectedGender={selectedGender}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>

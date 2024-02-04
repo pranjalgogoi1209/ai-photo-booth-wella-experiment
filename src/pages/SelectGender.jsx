@@ -37,9 +37,9 @@ export default function SelectGender({ setSelectedGender, selectedGender }) {
   return (
     <SelectGenderWrapper>
       <header>
-        <div className="logo">
+        <Link to={"/"} className="logo">
           <img src={logo} alt="logo" />
-        </div>
+        </Link>
         <h1>Select Your Gender</h1>
       </header>
 

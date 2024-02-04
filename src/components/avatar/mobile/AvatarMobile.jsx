@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "./../../../assets/logo.png";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import select from "./../../../assets/select.png";
 import {
   maleCardsActual,
   femaleCardsActual,
 } from "../../../utils/constantsActual";
+import { Link } from "react-router-dom";
 
 export default function AvatarMobile({
   maleCards,
@@ -61,9 +61,9 @@ export default function AvatarMobile({
   return (
     <AvatarMobileWrapper>
       <header>
-        <div className="logo">
+        <Link to={"/"} className="logo">
           <img src={logo} alt="logo" />
-        </div>
+        </Link>
         <h1>Select Your Avatar</h1>
       </header>
 

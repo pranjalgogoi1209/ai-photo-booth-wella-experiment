@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import AvatarMobile from "../components/avatar/mobile/AvatarMobile";
 import { maleCards, femaleCards } from "../utils/constants";
-// import { maleCardsActual, femaleCardsActual } from "../utils/constantsActual";
 
 export default function AvatarPage({
   capturedImage,
@@ -17,7 +16,7 @@ export default function AvatarPage({
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState();
   /*   capturedImage && console.log("capturedImage =>", capturedImage.split(",")[1]); */
-  selectedImage && console.log("selectedImage =>", selectedImage.split(",")[1]);
+  // selectedImage && console.log("selectedImage =>", selectedImage.split(",")[1]);
   /*  console.log("actual=>", maleCardsActual, femaleCardsActual); */
   selectedGender && console.log(selectedGender);
   // toast options
@@ -28,16 +27,6 @@ export default function AvatarPage({
     draggable: true,
     theme: "light",
   };
-
-  /*  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-
-  const getScaleImage = (originalImg, sw, sh) => {
-    canvas.width = img.width * sw;
-    canvas.height = img.height * sh;
-    context.drawImage(img, 0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL("image/png");
-  }; */
 
   // submitting the selected image and post request to api
   const handleSubmit = () => {

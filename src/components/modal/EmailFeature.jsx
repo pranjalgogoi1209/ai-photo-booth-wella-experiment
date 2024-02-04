@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "./../../assets/logo.png";
 import { IoMdCloseCircle } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function EmailFeature({ setIsEmailOpen, generatedImage }) {
+  const [url, setUrl] = useState();
+  const [userEmail, setUserEmail] = useState();
   // toast options
   const toastOptions = {
     position: "top-left",
@@ -15,25 +18,46 @@ export default function EmailFeature({ setIsEmailOpen, generatedImage }) {
     draggable: true,
     theme: "light",
   };
+
+  userEmail && console.log(userEmail);
   const handleSend = () => {
+    console.log(userEmail);
+    console.log(url);
+    console.log(generatedImage);
     console.log("clicked on Send Button");
-    /*    axios
-        .post("https://396e-103-17-110-13.ngrok-free.app/rec", {
-            // generatedImage
-        })
-        .then(function (response) {
-          console.log(response);
-          toast.error("Your Image successfully sent", toastOptions);
+    // upload image post request
+    axios
+      .post("https://adp24companyday.com/aiphotobooth/upload.php", {
+        img: generatedImage.split(",")[1],
+      })
+      .then(function (response) {
+        console.log(response);
+        setUrl(response.data.url);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // email post request
+    axios
+      .post("https://adp24companyday.com/aiphotobooth/emailer/index.php", {
+        email: userEmail,
+        url: url,
+      })
+      .then(function (response) {
+        console.log(response);
+        if (response.data.status === "success") {
+          toast.success("Your Image is successfully sent", toastOptions);
           setTimeout(() => {
             setIsEmailOpen(false);
           }, 4200);
-        })
-        .catch(function (error) {
-          console.log(error);
-          toast.error("Please enter an email", toastOptions);
-        
-        });
-    } */
+        } else {
+          toast.error("Please enter a valie email address", toastOptions);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -43,14 +67,18 @@ export default function EmailFeature({ setIsEmailOpen, generatedImage }) {
           <div className="close" onClick={() => setIsEmailOpen(false)}>
             <IoMdCloseCircle />
           </div>
-          <div className="logo">
+          <Link className="logo" to={"/"}>
             <img src={logo} alt="logo" />
-          </div>
+          </Link>
           <h1>Share Generated Image</h1>
         </header>
         <main>
           <div className="form">
-            <input type="mail" placeholder="Enter an email..." />
+            <input
+              type="mail"
+              placeholder="Enter an email..."
+              onChange={e => setUserEmail(e.target.value)}
+            />
             <button onClick={handleSend}>Send</button>
           </div>
         </main>
@@ -106,7 +134,7 @@ const EmailFeatureWrapper = styled.div`
     }
     h1 {
       /* border: 1px solid black; */
-      font-size: 4.5vw;
+      font-size: 4vw;
       text-align: center;
       font-weight: 600;
     }
@@ -122,6 +150,7 @@ const EmailFeatureWrapper = styled.div`
         /* background-color: #c72041; */
         width: 97%;
         padding: 2vw;
+        font-size: 2vw;
       }
       button {
         /* width: 27%; */
